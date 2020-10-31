@@ -1,5 +1,5 @@
 {
-  "name": "SvelteComponent",
+  "name": "svelte-paginator",
   "svelte": "src/index.js",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
@@ -14,10 +14,25 @@
     "svelte": "^3.0.0"
   },
   "keywords": [
-    "svelte"
+    "svelte",
+    "paginate",
+    "pagination",
+    "paginator"
   ],
   "files": [
     "src",
     "dist"
-  ]
+  ],
+  "description": "Pagination component for Svelte that supports a callback method for asynchronously loading elements",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mpdaugherty/svelte-paginator.git"
+  },
+  "author": "Mike Daugherty",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mpdaugherty/svelte-paginator/issues"
+  },
+  "homepage": "https://github.com/mpdaugherty/svelte-paginator#readme"
 }
