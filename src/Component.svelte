@@ -2,6 +2,7 @@
  export let endpoint = ((currentPage, perPage) => { return { numItems: 0, items: [] } })
  export let currentPage = 1
  export let perPage = 40
+ export let numPageLinks = 9 // Ideally odd for the design to balance & at least 5 to have enough space
 
  let items = []
  let numItems = 0
@@ -12,39 +13,59 @@
 
  $: numPages = Math.ceil(numItems / perPage)
  $: {
-   const middleMin = Math.max(currentPage - 2, 1)
-   const middleMax = Math.min(currentPage + 2, numPages)
-
    const linkArr = []
 
-   for (let i=middleMin; i<=middleMax; i++) {
-     linkArr.push({ text: i, page: i })
+   linkArr.push({ text: '&laquo;', page: currentPage > 1 ? currentPage - 1 : null })
+
+   if (numPages <= numPageLinks) {
+     // If there are more than enough slots for the total number of pages, just list all the pages
+     for (let i = 1; i <= numPages; i++) {
+       linkArr.push({ text: i, page: i})
+     }
+   } else {
+     const numEachSideLinks = numPageLinks > 7 ? 2 : 1
+     const numMidLinks = numPageLinks - 2 * numEachSideLinks
+
+     // Put in the left-side links
+     for (let i = 1; i <= numEachSideLinks; i++) {
+       linkArr.push({ text: i, page: i})
+     }
+
+     // We want to always display the current page and as many pages next to it as possible.
+     const numSidePages = (numMidLinks - 3) / 2
+
+     // Figure out where to put "..." into the list of pages. This may happen in one or two locations
+     // (not 0, since that is handled above where numPages <= numPageLinks)
+     const hasLeftEllipsis = currentPage - numSidePages > numEachSideLinks + 1
+     const hasRightEllipsis = currentPage + numSidePages < numPages - numEachSideLinks - 1
+
+     if (hasLeftEllipsis) {
+       linkArr.push({ text: '...' })
+     }
+
+     // Start & end for middle pages
+     const midStartPage = hasLeftEllipsis ?
+                          (hasRightEllipsis ? currentPage - numSidePages : numPages - numEachSideLinks - numMidLinks + 2) :
+                          numEachSideLinks + 1
+     const midEndPage = hasRightEllipsis ?
+                        midStartPage + numMidLinks - (hasLeftEllipsis ? 3 : 2) :
+                        numPages - numEachSideLinks
+
+     for (let i = midStartPage; i <= midEndPage; i++) {
+       linkArr.push({ text: i, page: i })
+     }
+
+     if (hasRightEllipsis) {
+       linkArr.push({ text: '...' })
+     }
+
+     // Put in the right-side links
+     for (let i = numPages - numEachSideLinks + 1; i<= numPages; i++) {
+       linkArr.push({ text: i, page: i })
+     }
    }
 
-   // Add left side
-   const leftMax = middleMin <= 3 ? middleMin - 1 : 3
-   if (leftMax < middleMin - 1) {
-     linkArr.unshift({ text: '...' })
-   }
-
-   for (let i=leftMax; i>=1; i--) {
-     linkArr.unshift({ text: i, page: i })
-   }
-
-   linkArr.unshift({ text: '&laquo;', page: currentPage > 1 ? currentPage - 1 : null })
-
-   // Add right side
-   const rightMin = middleMax >= numPages - 2 ? middleMax + 1 : numPages - 2
-   if (rightMin > middleMax + 1) {
-     linkArr.push({ text: '...' })
-   }
-
-   for (let i=rightMin; i<=numPages; i++) {
-     linkArr.push({ text: i, page: i })
-   }
-
-   linkArr.push({ text: '&raquo;', page: currentPage < numPages ? currentPage + 1 : null })
-
+   linkArr.push({text: '&raquo;', page: currentPage < numPages ? currentPage + 1 : null })
    pageLinks = linkArr
  }
 
