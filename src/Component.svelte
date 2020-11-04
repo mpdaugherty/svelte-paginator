@@ -24,7 +24,8 @@
      }
    } else {
      const numEachSideLinks = numPageLinks > 7 ? 2 : 1
-     const numMidLinks = numPageLinks - 2 * numEachSideLinks
+     // if numPageLinks is even, we add one to numMidLinks to make numMidLinks odd so there is a center
+     const numMidLinks = numPageLinks % 2 === 0 ? numPageLinks - 2 * numEachSideLinks + 1 : numPageLinks - 2 * numEachSideLinks
 
      // Put in the left-side links
      for (let i = 1; i <= numEachSideLinks; i++) {
@@ -63,8 +64,7 @@
      for (let i = numPages - numEachSideLinks + 1; i<= numPages; i++) {
        linkArr.push({ text: i, page: i })
      }
-   }
-
+   } 
    linkArr.push({text: '&raquo;', page: currentPage < numPages ? currentPage + 1 : null })
    pageLinks = linkArr
  }
