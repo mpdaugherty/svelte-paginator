@@ -23,6 +23,15 @@
        linkArr.push({ text: i, page: i})
      }
    } else {
+     // If there are less than 7 total links, show only the first and last pages on the sides
+     // and leave the remaining slots for the middle pages. If there's more than 7 links, make
+     // this look a little nicer by showing the first & second and the last two pages.
+     //
+     // Example with 7 links:
+     // 1 … 4 5 6 … 10
+     //
+     // Example with 9 links:
+     // 1 2 … 4 5 6 … 9 10
      const numEachSideLinks = numPageLinks > 7 ? 2 : 1
      const numMidLinks = numPageLinks - 2 * numEachSideLinks
 
