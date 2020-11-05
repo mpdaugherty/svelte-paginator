@@ -24,8 +24,7 @@
      }
    } else {
      const numEachSideLinks = numPageLinks > 7 ? 2 : 1
-     // if numPageLinks is even, we add one to numMidLinks to make numMidLinks odd so there is a center
-     const numMidLinks = numPageLinks % 2 === 0 ? numPageLinks - 2 * numEachSideLinks + 1 : numPageLinks - 2 * numEachSideLinks
+     const numMidLinks = numPageLinks - 2 * numEachSideLinks
 
      // Put in the left-side links
      for (let i = 1; i <= numEachSideLinks; i++) {
@@ -46,7 +45,7 @@
 
      // Start & end for middle pages
      const midStartPage = hasLeftEllipsis ?
-                          (hasRightEllipsis ? currentPage - numSidePages : numPages - numEachSideLinks - numMidLinks + 2) :
+                          (hasRightEllipsis ? Math.floor(currentPage - numSidePages) : numPages - numEachSideLinks - numMidLinks + 2) :
                           numEachSideLinks + 1
      const midEndPage = hasRightEllipsis ?
                         midStartPage + numMidLinks - (hasLeftEllipsis ? 3 : 2) :
@@ -95,6 +94,7 @@
  .paginator > .clickable {
    cursor: pointer;
  }
+ 
 </style>
 
 <div class="btn-group paginator">
