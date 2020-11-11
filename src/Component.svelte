@@ -92,10 +92,26 @@
 </script>
 
 <style>
- .paginator > .clickable {
-   cursor: pointer;
- }
-</style>
+  .paginator {
+    display: inline-block;
+  }
+ 
+  .btn {
+   color: black;
+   padding: 8px 16px;
+   min-width: 60px;
+   border-radius: 0px
+  }
+ 
+  .btn-secondary {
+   background-color: rgb(161, 161, 161);
+   color: white;
+  }
+ 
+  .btn-outline-secondary {
+    border: 1px solid #ddd
+  }
+ </style>
 
 <div class="btn-group paginator">
   {#each pageLinks as link}
