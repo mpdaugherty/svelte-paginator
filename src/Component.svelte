@@ -41,12 +41,13 @@
      }
 
      // We want to always display the current page and as many pages next to it as possible.
-     const numSidePages = (numMidLinks - 3) / 2
+     const numLeftMidPages = Math.ceil((numMidLinks - 3) / 2)
+     const numRightMidPages = Math.floor((numMidLinks - 3) / 2)
 
      // Figure out where to put "..." into the list of pages. This may happen in one or two locations
      // (not 0, since that is handled above where numPages <= numPageLinks)
-     const hasLeftEllipsis = currentPage - numSidePages > numEachSideLinks + 1
-     const hasRightEllipsis = currentPage + numSidePages < numPages - numEachSideLinks - 1
+     const hasLeftEllipsis = currentPage - numLeftMidPages > numEachSideLinks + 2
+     const hasRightEllipsis = currentPage + numRightMidPages < numPages - numEachSideLinks - 1
 
      if (hasLeftEllipsis) {
        linkArr.push({ text: '...' })
@@ -54,7 +55,7 @@
 
      // Start & end for middle pages
      const midStartPage = hasLeftEllipsis ?
-                          (hasRightEllipsis ? currentPage - numSidePages : numPages - numEachSideLinks - numMidLinks + 2) :
+                          (hasRightEllipsis ? currentPage - numLeftMidPages : numPages - numEachSideLinks - numMidLinks + 2) :
                           numEachSideLinks + 1
      const midEndPage = hasRightEllipsis ?
                         midStartPage + numMidLinks - (hasLeftEllipsis ? 3 : 2) :
@@ -73,7 +74,6 @@
        linkArr.push({ text: i, page: i })
      }
    }
-
    linkArr.push({text: '&raquo;', page: currentPage < numPages ? currentPage + 1 : null })
    pageLinks = linkArr
  }
@@ -104,6 +104,7 @@
  .paginator > .clickable {
    cursor: pointer;
  }
+
 </style>
 
 <div class="btn-group paginator">
