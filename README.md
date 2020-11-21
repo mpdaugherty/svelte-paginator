@@ -2,6 +2,8 @@
 
 An unopinionated paginator component for Svelte.
 
+![Svelte-Paginator Example](https://github.com/mpdaugherty/svelte-paginator/raw/main/README_images/example.png "Svelte Paginator Example")
+
 ## Example
 
 ```svelte
