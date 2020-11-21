@@ -24,7 +24,7 @@
     "dist"
   ],
   "description": "Unopinionated pagination component for Svelte that supports a callback method for asynchronously loading elements and customizeable styling.",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mpdaugherty/svelte-paginator.git"
