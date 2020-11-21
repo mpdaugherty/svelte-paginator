@@ -110,16 +110,36 @@
  }
 
  .paginator-button {
-   padding: 8px 16px;
-   min-width: 60px;
+   padding: 0.25em 0.5em;
+   min-width: 2.5em;
    border-radius: 0px;
    border: 1px solid #ddd;
+   border-left: none;
  }
 
  .paginator-current-page {
-   background-color: #999;
-   border-color: #999;
+   background-color: #999 !important;
+   border-color: #999 !important;
    color: white;
+ }
+
+ .paginator-button:enabled:hover {
+   background-color: #aaa;
+   border-color: #999;
+ }
+
+ .paginator-button:disabled:hover {
+   background-color: #ddd;
+   border-color: #ccc;
+ }
+
+ .paginator-button:first-child {
+   border-radius: 0.25em 0 0 0.25em;
+   border-left: 1px solid #ddd;
+ }
+
+ .paginator-button:last-child {
+   border-radius: 0 0.25em 0.25em 0;
  }
 </style>
 
