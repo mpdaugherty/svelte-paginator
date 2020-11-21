@@ -23,7 +23,7 @@
  let items = []
  let numItems = 0
 
- let state = 'loading'
+ let loading = true
 
  let pageLinks = []
 
@@ -98,11 +98,11 @@
  $: currentPage && loadItems()
 
  async function loadItems () {
-   state = 'loading'
+   loading = true
    const response = await endpoint(currentPage, perPage)
    numItems = response.numItems
    items = response.items
-   state = 'loaded'
+   loading = false
  }
 </script>
 
@@ -157,7 +157,7 @@
   {/each}
 </div>
 
-<slot {items}></slot>
+<slot {items} {loading}></slot>
 
 <div class="{class_button_group}">
   {#each pageLinks as link}
