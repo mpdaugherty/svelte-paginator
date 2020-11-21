@@ -129,7 +129,7 @@ Available classes are:
 
 For example, if you'd like to use Bootstrap classes, you might do something like this:
 
-```
+```svelte
 <Paginator loadItems let:items
   class_button="btn btn-outline-secondary"
   class_current_page="btn btn-secondary"
