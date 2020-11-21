@@ -86,7 +86,7 @@ You can see this in action at https://github.com/mpdaugherty/svelte-paginator-te
 
  let letters = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
  const loadLetters = async (page=1, perPage=10) => {
-   await new Promise(resolve => setTimeout(resolve, 1500))
+   await new Promise(resolve => setTimeout(resolve, 1500)) // Simulate a delay, e.g. loading from a server
    const start = perPage * (page-1)
    const end = start + perPage
    return {
