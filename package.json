@@ -23,13 +23,13 @@
     "src",
     "dist"
   ],
-  "description": "Pagination component for Svelte that supports a callback method for asynchronously loading elements",
-  "version": "0.0.1",
+  "description": "Unopinionated pagination component for Svelte that supports a callback method for asynchronously loading elements and customizeable styling.",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mpdaugherty/svelte-paginator.git"
   },
-  "author": "Mike Daugherty",
+  "author": "Michael Daugherty & Laura Daugherty",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mpdaugherty/svelte-paginator/issues"
