@@ -173,3 +173,9 @@ This is an example page that imports & uses `Paginator`. You can modify this to 
 Issues are tracked with Github Issues. When completing issues, please develop on a branch and create a pull request linked to the issue you are working on.
 
 For issue discussions, generally use comments on the Github issues so we have documentation of the decisions we've made - but SMS or email is fine as well if you need a response quickly.
+
+## Publishing to npm
+
+```shell
+npm publish
+```
