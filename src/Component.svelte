@@ -4,6 +4,10 @@
  export let perPage = 40
  export let numPageLinks = 9 // Ideally odd for the design to balance & at least 5 to have enough space
 
+ export let class_button = 'paginator-button'
+ export let class_button_group = 'paginator-button-group'
+ export let class_current_page = 'paginator-button paginator-current-page'
+
  let items = []
  let numItems = 0
 
@@ -101,18 +105,50 @@
 </script>
 
 <style>
- .paginator > .clickable {
+ button:enabled {
    cursor: pointer;
  }
 
+ .paginator-button {
+   padding: 0.25em 0.5em;
+   min-width: 2.5em;
+   border-radius: 0px;
+   border: 1px solid #ddd;
+   border-left: none;
+ }
+
+ .paginator-current-page {
+   background-color: #999 !important;
+   border-color: #999 !important;
+   color: white;
+ }
+
+ .paginator-button:enabled:hover {
+   background-color: #aaa;
+   border-color: #999;
+ }
+
+ .paginator-button:disabled:hover {
+   background-color: #ddd;
+   border-color: #ccc;
+ }
+
+ .paginator-button:first-child {
+   border-radius: 0.25em 0 0 0.25em;
+   border-left: 1px solid #ddd;
+ }
+
+ .paginator-button:last-child {
+   border-radius: 0 0.25em 0.25em 0;
+ }
 </style>
 
-<div class="btn-group paginator">
+<div class="{class_button_group}">
   {#each pageLinks as link}
     <button
       type="button"
-      class="btn {currentPage == link.page ? 'btn-secondary' : 'btn-outline-secondary'}"
-      disabled = {!link.page || link.page == currentPage}
+      class="{currentPage == link.page ? class_current_page : class_button}"
+      disabled={!link.page || link.page == currentPage}
       on:click={() => { if (link.page) { currentPage = link.page } } }>
       {@html link.text}
     </button>
@@ -121,16 +157,14 @@
 
 <slot {items}></slot>
 
-<div class="my-3">
-  <div class="btn-group paginator">
-    {#each pageLinks as link}
-      <button
-        type="button"
-        class="btn {currentPage == link.page ? 'btn-secondary' : 'btn-outline-secondary'}"
-        disabled = {!link.page || link.page == currentPage}
-        on:click={() => { if (link.page) { currentPage = link.page } } }>
-        {@html link.text}
-      </button>
-    {/each}
-  </div>
+<div class="{class_button_group}">
+  {#each pageLinks as link}
+    <button
+      type="button"
+      class="{currentPage == link.page ? class_current_page : class_button}"
+      disabled={!link.page || link.page == currentPage}
+      on:click={() => { if (link.page) { currentPage = link.page } } }>
+      {@html link.text}
+    </button>
+  {/each}
 </div>
