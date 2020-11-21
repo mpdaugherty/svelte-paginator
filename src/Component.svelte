@@ -2,7 +2,19 @@
  export let endpoint = ((currentPage, perPage) => { return { numItems: 0, items: [] } })
  export let currentPage = 1
  export let perPage = 40
- export let numPageLinks = 9 // Ideally odd for the design to balance & at least 5 to have enough space
+ export let numPageLinks = 9 // Needs to be at least 5 to have enough space for the center buttons
+
+ // This function deletes the list of items and re-executes the endpoint to load a new set of items
+ // Use this if the set of items to be displayed changes
+ export function reset () {
+   items = []
+   numItems = 0
+   if (currentPage == 1) {
+     loadItems()
+   } else {
+     currentPage = 1
+   }
+ }
 
  export let class_button = 'paginator-button'
  export let class_button_group = 'paginator-button-group'
@@ -91,16 +103,6 @@
    numItems = response.numItems
    items = response.items
    state = 'loaded'
- }
-
- export function reset () {
-   items = []
-   numItems = 0
-   if (currentPage == 1) {
-     loadItems()
-   } else {
-     currentPage = 1
-   }
  }
 </script>
 
