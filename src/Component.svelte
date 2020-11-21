@@ -123,7 +123,7 @@
  }
 </style>
 
-<div class="paginator">
+<div class="{class_button_group}">
   {#each pageLinks as link}
     <button
       type="button"
@@ -137,7 +137,7 @@
 
 <slot {items}></slot>
 
-<div class="paginator">
+<div class="{class_button_group}">
   {#each pageLinks as link}
     <button
       type="button"
